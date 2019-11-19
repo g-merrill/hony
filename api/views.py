@@ -8,7 +8,7 @@ api = Blueprint('api', __name__)
 def add_story():
   story_data = request.get_json()
 
-  new_story = Story(content=story_data['content'], url=story_data['url'])
+  new_story = Story(content=story_data['content'], url=story_data['url'], timestamp=story_data['timestamp'], sequence=story_data['sequence'], location=story_data['location'], storylength=story_data['storylength'], microfashion=story_data['microfashion'])
 
   db.session.add(new_story)
   db.session.commit()
