@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
+import './App.scss';
 import { Stories } from './components/Stories';
 
 function App() {
@@ -15,12 +15,8 @@ function App() {
   }, []);
 
   return (
-    <div 
-      style={{ marginTop: 40 }}
-    >
-      <Stories 
-        stories={ stories }
-      />
+    <div className='App' >
+      <Stories stories={ stories } />
     </div>
   );
 }
