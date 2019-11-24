@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.scss';
 import { Stories } from './components/Stories';
+import SearchBar from './components/SearchBar';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <div className='App' >
+      <SearchBar />
       <Stories stories={ stories } />
     </div>
   );

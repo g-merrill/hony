@@ -18,12 +18,10 @@ def add_story():
 
 @api.route('/api/stories')
 def stories():
-  stories_list = Story.query.paginate(1, 5)
-  print(stories_list)
+  stories_list = Story.query.paginate(33, 10)
   stories = []
 
   for story in stories_list.items:
-    print(story)
     stories.append({ 'content': story.content, 'url': story.url, 'timestamp': story.timestamp, 'sequence': story.sequence, 'location': story.location, 'storylength': story.storylength, 'microfashion': story.microfashion })
 
   return jsonify({ 'stories': stories })
