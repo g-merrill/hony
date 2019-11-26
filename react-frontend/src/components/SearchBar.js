@@ -1,19 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './css/SearchBar.scss';
 
-const SearchBar = () => {
+const SearchBar = ({ queryStories }) => {
   const [query, setQuery] = useState('');
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log(query);
+    console.log(`submitted query is: ${query}`);
   };
 
   const handleChange = evt => setQuery(evt.target.value);
 
+  useEffect(() => {
+    queryStories(query);
+  }, [queryStories, query]);
+
   return (
-    <form className='SearchBar-form' onSubmit={handleSubmit}>
-      <input className='SearchBar-input' placeholder='Search HONY stories' type='text' value={query} onChange={handleChange} />
+    <form 
+      className='SearchBar-form' 
+      onSubmit={handleSubmit}
+    >
+      <input 
+        className='SearchBar-input' 
+        placeholder='Search HONY stories' 
+        type='text' 
+        value={query} 
+        onChange={handleChange} 
+      />
     </form>
   );
 }
