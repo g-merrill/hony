@@ -1,9 +1,8 @@
-.SearchBar {
-  width: 100%;
-  font-size: 1em;
-  position: relative;
-  font-weight: 400;
-  font-style: normal;
-  display: inline-flex;
-  color: rgba(0, 0, 0, 0.87);
+.SearchBar-form {
+  width: 90%;
+  margin: 0 0 30px;
+  .SearchBar-input {
+    padding: 0.75em 1em;
+    width: 100%;
+  }
 }
