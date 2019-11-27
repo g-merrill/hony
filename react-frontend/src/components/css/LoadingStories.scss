@@ -1,0 +1,8 @@
+.LoadingStories {
+  animation: blinker 2.5s ease infinite;
+  @keyframes blinker {
+    50% {
+      opacity: 0.25;
+    }
+  }
+}

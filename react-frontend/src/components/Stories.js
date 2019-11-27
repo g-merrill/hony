@@ -1,46 +1,23 @@
 import React from 'react';
 import './css/Stories.scss';
+import Story from './Story';
 
 const Stories = ({ stories, query }) => {
 
   return (
     <ul className='Stories' >
-      {stories.map((story, idx) => (
-        idx < 100 ? (
-          <li 
-            key={idx} 
-            className='story'
-          >
-
-            {story.timestamp && 
-            <p 
-              className='story-timestamp'
-            >
-              {story.timestamp}
-            </p>}
-
-            <p 
-              className='story-content'
-            >
-              {story.content}
-            </p>
-
-            {story.location && 
-            <p
-              className='story-location'
-            >
-              ({story.location})
-            </p>}
-
-            <img 
-              className='story-img'
-              src={story.url} 
-              alt="honypic"
-            />
-
-          </li>
-        ) : null
-      ))}
+      { stories.length ? (
+        stories.map((story, idx) => (
+          <Story 
+            key={idx}
+            idx={idx}
+            story={story}
+            query={query}
+          />
+      ))
+      ) : (
+        <div>No stories match the search query: "{query}"</div>
+      )}
     </ul>
   );
 }

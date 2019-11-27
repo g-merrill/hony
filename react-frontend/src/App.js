@@ -2,10 +2,11 @@ import React, { useEffect, useState, useCallback } from 'react';
 import './App.scss';
 import Stories from './components/Stories';
 import SearchBar from './components/SearchBar';
+import LoadingStories from './components/LoadingStories';
 
 function App() {
 
-  const [stories, setStories] = useState([]);
+  const [allStories, setAllStories] = useState([]);
   const [filteredStories, setFilteredStories] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -13,36 +14,42 @@ function App() {
   useEffect(() => {
     fetch('/api/stories').then(res => 
       res.json().then(data => {
-        setStories(data.stories);
+        setAllStories(data.stories);
       })
     );
   }, []);
 
   // this is triggered when something is typed in the search bar, the stories are filtered based on whether they include what was typed in the search bar
-  // this is all frontend filtering
-  const queryStories = useCallback(
-    (query) => {
-      setSearchQuery(query);
-      setFilteredStories(stories.filter(story => {
-        return (
-          (story.location && 
-            story.location.toLowerCase().includes(query.toLowerCase())) ||
-          story.storylength.toLowerCase().includes(query.toLowerCase()) ||
-          story.content.toLowerCase().includes(query.toLowerCase()) ||
-          story.timestamp.toLowerCase().includes(query.toLowerCase())
-        );
-      }));
-    }, [stories]);
+  // this is all frontend filtering using JavaScript methods
+  const queryStories = useCallback(query => {
+    setSearchQuery(query);
+    setFilteredStories(allStories.filter(story => {
+      return (
+        (story.location && 
+          story.location.toLowerCase().includes(query.toLowerCase())) ||
+        story.storylength.toLowerCase().includes(query.toLowerCase()) ||
+        story.content.toLowerCase().includes(query.toLowerCase()) ||
+        story.timestamp.toLowerCase().includes(query.toLowerCase())
+      );
+    }));
+  }, [allStories]);
 
   return (
     <div className='App' >
-      <SearchBar 
-        queryStories={queryStories} 
-      />
-      <Stories 
-        stories={ (filteredStories.length || searchQuery) ? filteredStories : stories } 
-        query={ filteredStories.length ? searchQuery : null }
-      />
+      {allStories.length ? (
+        <>
+          <SearchBar 
+            queryStories={queryStories} 
+          />
+          <Stories 
+            stories={ (filteredStories.length || searchQuery) ?
+              filteredStories : allStories } 
+            query={searchQuery}
+          />
+        </>
+      ) : (
+        <LoadingStories />
+      )}
     </div>
   );
 }
