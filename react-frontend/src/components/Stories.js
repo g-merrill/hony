@@ -15,9 +15,7 @@ const Stories = ({ stories, query }) => {
             query={query}
           />
       ))
-      ) : (
-        <div>No stories match the search query: "{query}"</div>
-      )}
+      ) : null }
     </ul>
   );
 }

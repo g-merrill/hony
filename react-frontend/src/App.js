@@ -41,9 +41,14 @@ function App() {
           <SearchBar 
             queryStories={queryStories} 
           />
+          <h3 className='results-msg'>{
+            searchQuery ? 
+            (`${filteredStories.length} result(s) match the search query: "${searchQuery}"`) : 
+            `${allStories.length} stories`
+            }
+          </h3>
           <Stories 
-            stories={ (filteredStories.length || searchQuery) ?
-              filteredStories : allStories } 
+            stories={ searchQuery ? filteredStories : allStories } 
             query={searchQuery}
           />
         </>

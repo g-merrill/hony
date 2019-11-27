@@ -1,8 +1,17 @@
 .Story {
   max-width: 90vw;
   margin: 0 0 60px;
+  .Story-timestamp {
+    margin: 0 0 10px;
+  }
+  .Story-content {
+    margin: 0 0 10px;
+  }
   .Story-img {
     max-width: 90vw;
     margin: 20px 0 0;
+  }
+  .query-word {
+    font-weight: bolder;
   }
 }

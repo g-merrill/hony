@@ -6,7 +6,6 @@ const SearchBar = ({ queryStories }) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log(`submitted query is: ${query}`);
   };
 
   const handleChange = evt => setQuery(evt.target.value);
