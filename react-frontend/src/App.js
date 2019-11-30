@@ -41,12 +41,27 @@ function App() {
           <SearchBar 
             queryStories={queryStories} 
           />
-          <h3 className='results-msg'>{
-            searchQuery ? 
-            (`${filteredStories.length} result(s) match the search query: "${searchQuery}"`) : 
-            `${allStories.length} stories`
-            }
-          </h3>
+          { searchQuery ? (
+            <>
+              <h3 className='results-msg'>
+                {filteredStories.length} result(s) match the search query: "{searchQuery}"
+              </h3>
+              { filteredStories.length ? (
+                <h3 className='api-msg'>
+                  API endpoint: https://hony.herokuapp.com/api/stories?search={searchQuery}
+                </h3>
+              ) : null }
+            </>
+          ) : (
+            <>
+              <h3 className='results-msg'>
+                {allStories.length} stories
+              </h3>
+              <h3 className='api-msg'>
+                API endpoint: https://hony.herokuapp.com/api/stories
+              </h3>
+            </>
+          )}
           <Stories 
             stories={ searchQuery ? filteredStories : allStories } 
             query={searchQuery}
