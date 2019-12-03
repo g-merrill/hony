@@ -1,0 +1,16 @@
+.GenerateKeyBtn-ctnr {
+  display: flex;
+  width: 90vw;
+  margin: 0 0 30px;
+  .GenerateKeyBtn {
+    background: green;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    &:focus {
+      outline: 0;
+    }
+  }
+}

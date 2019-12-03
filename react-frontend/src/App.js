@@ -3,6 +3,7 @@ import './App.scss';
 import Stories from './components/Stories';
 import SearchBar from './components/SearchBar';
 import LoadingStories from './components/LoadingStories';
+import GenerateKeyBtn from './components/GenerateKeyBtn';
 
 function App() {
 
@@ -62,6 +63,7 @@ function App() {
               </h3>
             </>
           )}
+          <GenerateKeyBtn />
           <Stories 
             stories={ searchQuery ? filteredStories : allStories } 
             query={searchQuery}

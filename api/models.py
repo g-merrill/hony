@@ -10,3 +10,7 @@ class Story(db.Model):
   storylength = db.Column(db.String(10), nullable=True)
   microfashion = db.Column(db.Boolean, default=False)
   
+class Key(db.Model):
+  id = db.Column(db.Integer, primary_key=True)
+  keystring = db.Column(db.String(6), unique=True, nullable=False)
+  
