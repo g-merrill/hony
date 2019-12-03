@@ -62,7 +62,13 @@ def keys():
     keys.append({ 'id': key.id, 'keystring': key.keystring })
   return jsonify({ 'keys': keys })
 
-
+# @api.route('/api/keys/delete_all')
+# def delete_keys():
+#   keys_list = Key.query.all()
+#   keys = []
+#   for key in keys_list:
+#     keys.append({ 'id': key.id, 'keystring': key.keystring })
+#   return jsonify({ 'keys': keys })
 
 # @api.route('/api/keys/<int:key_id>')
 # def authenticate_key():
