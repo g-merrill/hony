@@ -1,10 +1,22 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, render_template
 from flask_sqlalchemy import Pagination
+from flask_login import login_required, current_user
 from random import randint
 from . import db
 from .models import Story, Key
 
 api = Blueprint('api', __name__)
+
+# delete this before switching to React frontend, this is just to test login functionality
+@api.route('/')
+def my_index():
+  return render_template('index.html')
+
+@api.route('/profile')
+@login_required
+def profile():
+  return render_template('profile.html', name=current_user.name)
+# delete this before switching to React frontend, this is just to test login functionality
 
 @api.route('/api/stories/add_story', methods=['POST'])
 def add_story():
