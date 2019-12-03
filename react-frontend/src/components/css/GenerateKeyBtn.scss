@@ -1,5 +1,7 @@
 .GenerateKeyBtn-ctnr {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   width: 90vw;
   margin: 0 0 30px;
   .GenerateKeyBtn {
@@ -12,5 +14,8 @@
     &:focus {
       outline: 0;
     }
+  }
+  .generatedKey {
+    margin: 5px 0 0;
   }
 }

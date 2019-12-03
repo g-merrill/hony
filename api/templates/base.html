@@ -19,11 +19,6 @@
               <a href="{{ url_for('api.my_index') }}" class="navbar-item">
                 Home
               </a>
-              {% if current_user.is_authenticated %}
-              <a href="{{ url_for('api.profile') }}" class="navbar-item">
-                Profile
-              </a>
-              {% endif %}
               {% if not current_user.is_authenticated %}
               <a href="{{ url_for('auth.login') }}" class="navbar-item">
                 Login

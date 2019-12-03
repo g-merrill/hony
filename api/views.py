@@ -3,21 +3,11 @@ from flask_sqlalchemy import Pagination
 from flask_login import login_required, current_user
 from random import randint
 from . import db
-from .models import Story, Key
+from .models import User, Story, Key
 
 api = Blueprint('api', __name__)
 
-# delete this before switching to React frontend, this is just to test login functionality
-@api.route('/')
-def my_index():
-  return render_template('index.html')
-
-@api.route('/profile')
-@login_required
-def profile():
-  return render_template('profile.html', name=current_user.name)
-# delete this before switching to React frontend, this is just to test login functionality
-
+# FOR DEV PURPOSES ONLY
 @api.route('/api/stories/add_story', methods=['POST'])
 def add_story():
   story_data = request.get_json()
@@ -31,22 +21,24 @@ def add_story():
 
 @api.route('/api/stories')
 def stories():
-  search = request.args.get('search')
-  # api_key = request.args.get('key')
 
   # stories_list = Story.query.paginate(33, 10)
   stories_list = Story.query.all()
   stories = []
 
-  # for story in stories_list.items:
-  # if api_key:
-  for story in stories_list:
-    # if story matches search or there is no search, append this story
-    if not search or search in story.content or (story.location and search in story.location) or search in story.timestamp or search in story.storylength:
-      stories.append({ 'id': story.id, 'content': story.content, 'url': story.url, 'timestamp': story.timestamp, 'sequence': story.sequence, 'location': story.location, 'storylength': story.storylength, 'microfashion': story.microfashion })
-  return jsonify({ 'stories': stories })
-  # else:
-  #   return 'ERROR: please provide valid API Key', 401
+  search = request.args.get('search')
+  api_key = request.args.get('key')
+  valid_keystring = Key.query.filter_by(keystring=api_key).first()
+
+  if valid_keystring:
+    # for story in stories_list.items:
+    for story in stories_list:
+      # if story matches search or there is no search, append this story
+      if not search or search in story.content or (story.location and search in story.location) or search in story.timestamp or search in story.storylength:
+        stories.append({ 'id': story.id, 'content': story.content, 'url': story.url, 'timestamp': story.timestamp, 'sequence': story.sequence, 'location': story.location, 'storylength': story.storylength, 'microfashion': story.microfashion })
+    return jsonify({ 'stories': stories })
+  else:
+    return 'ERROR: please provide valid API Key', 401
 
 # 
 # 
@@ -61,11 +53,12 @@ def add_key():
   new_key = Key(keystring=generated_key)
   db.session.add(new_key)
   db.session.commit()
-  return jsonify({ 'generated_key': generated_key })
+  return jsonify({ 'id': new_key.id, 'keystring': new_key.keystring })
 # 
 # 
 # 
 
+# FOR DEV PURPOSES ONLY
 @api.route('/api/keys')
 def keys():
   keys_list = Key.query.all()
@@ -74,6 +67,7 @@ def keys():
     keys.append({ 'id': key.id, 'keystring': key.keystring })
   return jsonify({ 'keys': keys })
 
+# FOR DEV PURPOSES ONLY
 @api.route('/api/keys/delete_all')
 def delete_keys():
   keys_list = Key.query.all()
@@ -89,3 +83,21 @@ def delete_keys():
 
 #   # else return error
 #   return jsonify({ 'stories': stories })
+
+# FOR DEV PURPOSES ONLY
+@api.route('/api/users')
+def users():
+  users_list = User.query.all()
+  users = []
+  for user in users_list:
+    users.append({ 'id': user.id, 'email': user.email, 'password': user.password, 'name': user.name })
+  return jsonify({ 'users': users })
+
+# FOR DEV PURPOSES ONLY
+@api.route('/api/users/delete_all')
+def delete_users():
+  users_list = User.query.all()
+  for user in users_list:
+    db.session.delete(user)
+  db.session.commit()
+  return 'All users have been deleted', 201

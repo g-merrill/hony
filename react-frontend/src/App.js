@@ -1,19 +1,21 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import './App.scss';
-import Stories from './components/Stories';
-import SearchBar from './components/SearchBar';
-import LoadingStories from './components/LoadingStories';
-import GenerateKeyBtn from './components/GenerateKeyBtn';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+// import SeedDataBtn from './components/SeedDataBtn';
 
-function App() {
+const App = () => {
 
   const [allStories, setAllStories] = useState([]);
   const [filteredStories, setFilteredStories] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [user, setUser] = useState(null);
 
   // once the app mounts, this loads all stories from the fetch endpoint into state as 'stories'
   useEffect(() => {
-    fetch('/api/stories').then(res => 
+    fetch('/api/stories?key=G4TCdX').then(res => 
       res.json().then(data => {
         setAllStories(data.stories);
       })
@@ -35,43 +37,42 @@ function App() {
     }));
   }, [allStories]);
 
+  const loginUser = userObj => {
+    setUser(userObj);
+  }
+
+  const logoutUser = () => {
+    fetch('/auth/logout').then(res => {
+      if (res.ok) setUser(null);
+    });
+  }
+
   return (
     <div className='App' >
-      {allStories.length ? (
-        <>
-          <SearchBar 
-            queryStories={queryStories} 
+      <Switch>
+        <Route exact path='/' render={({ history }) => (
+          <Home
+            history={history}
+            user={user}
+            logoutUser={logoutUser}
+            allStories={allStories}
+            queryStories={queryStories}
+            searchQuery={searchQuery}
+            filteredStories={filteredStories}
           />
-          { searchQuery ? (
-            <>
-              <h3 className='results-msg'>
-                {filteredStories.length} result(s) match the search query: "{searchQuery}"
-              </h3>
-              { filteredStories.length ? (
-                <h3 className='api-msg'>
-                  API endpoint: https://hony.herokuapp.com/api/stories?search={searchQuery}
-                </h3>
-              ) : null }
-            </>
-          ) : (
-            <>
-              <h3 className='results-msg'>
-                {allStories.length} stories
-              </h3>
-              <h3 className='api-msg'>
-                API endpoint: https://hony.herokuapp.com/api/stories
-              </h3>
-            </>
-          )}
-          <GenerateKeyBtn />
-          <Stories 
-            stories={ searchQuery ? filteredStories : allStories } 
-            query={searchQuery}
+        )}/>
+        <Route exact path='/login' render={({ history }) => (
+          <Login 
+            history={history}
+            loginUser={loginUser}
           />
-        </>
-      ) : (
-        <LoadingStories />
-      )}
+        )}/>
+        <Route exact path='/signup' render={({ history }) => (
+          <Signup 
+            history={history}
+          />
+        )}/>
+      </Switch>
     </div>
   );
 }

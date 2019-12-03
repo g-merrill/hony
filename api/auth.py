@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, jsonify, render_template, redirect, url_for, request, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required
 from .models import User
@@ -10,51 +10,57 @@ auth = Blueprint('auth', __name__)
 # /login
 # /profile
 # /signup
-@auth.route('/login')
-def login():
-  return render_template('login.html')
 
-@auth.route('/login', methods=['POST'])
+@auth.route('/auth/login', methods=['POST'])
 def login_post():
-  email = request.form.get('email')
-  password = request.form.get('password')
-  remember = True if request.form.get('remember') else False
+  login_data = request.get_json()
+  email = login_data['email']
 
   user = User.query.filter_by(email=email).first()
 
+  password = login_data['password']
+  remember = True if login_data['remember'] == 'true' else False
+
   if not user or not check_password_hash(user.password, password):
-    flash('Please check your login details and try again.')
-    return redirect(url_for('auth.login'))
-  
+    return jsonify({
+      'message': 'Please check your login details and try again.'
+    })
+
   login_user(user, remember=remember)
 
-  return redirect(url_for('api.profile'))
+  return jsonify({
+    'id': user.id,
+    'email': user.email,
+    'name': user.name
+  })
 
-@auth.route('/signup')
-def signup():
-  return render_template('signup.html')
-
-@auth.route('/signup', methods=['POST'])
+@auth.route('/auth/signup', methods=['POST'])
 def signup_post():
-  email = request.form.get('email')
-  name = request.form.get('name')
-  password = request.form.get('password')
+  signup_data = request.get_json()
+  email = login_data['email']
+  name = login_data['name']
+  password = login_data['password']
 
   user = User.query.filter_by(email=email).first()
 
   if user:
-    flash('Email address already exists.')
-    return redirect(url_for('auth.signup'))
+    return jsonify({
+      'message': 'Email address already exists.'
+    })
   
   new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
 
   db.session.add(new_user)
   db.session.commit()
 
-  return redirect(url_for('auth.login'))
+  return jsonify({
+    'id': new_user.id,
+    'email': new_user.email,
+    'name': new_user.name
+  })
 
-@auth.route('/logout')
+@auth.route('/auth/logout')
 @login_required
 def logout():
   logout_user()
-  return redirect(url_for('api.my_index'))
+  return 'Logged out', 200

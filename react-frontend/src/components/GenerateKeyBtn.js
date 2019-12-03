@@ -37,7 +37,10 @@ const GenerateKeyBtn = () => {
   return (
     <div className='GenerateKeyBtn-ctnr'>
     { clicked ? (
-      <p className='generatedKey'>Your API Key: {apiKey}</p>
+      <>
+        <p>API Key Generated!  Add the following to the end of your custom API endpoint:</p>
+        <h3 className='generatedKey'>&key={apiKey}</h3>
+      </>
     ) : (
       <button 
         className='GenerateKeyBtn'
