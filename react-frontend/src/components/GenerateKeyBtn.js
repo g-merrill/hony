@@ -11,16 +11,19 @@ const GenerateKeyBtn = () => {
     setCounter(1);
   }
 
+// /api/keys/new
+
   useEffect(() => {
     // get generated key from backend
-    const fetchKey = async() => {
-      // actual await fetch call here instead of dummy string
-      const keyFromAPI = await 'DF2sD4';
-      setApiKey(keyFromAPI);
-      console.log(keyFromAPI);
+    const fetchKey = () => {
+      fetch('/api/keys/new')
+      .then(res => 
+        res.json().then(data => {
+          setApiKey(data.generated_key);
+        })
+      );
     }
     counter > 0 && fetchKey()
-    console.log('ran this function')
   }, [counter]);
 
   // useEffect(() => {

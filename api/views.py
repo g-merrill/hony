@@ -49,7 +49,7 @@ def add_key():
   new_key = Key(keystring=generated_key)
   db.session.add(new_key)
   db.session.commit()
-  return jsonify({ 'api_key': new_key })
+  return jsonify({ 'generated_key': generated_key })
 # 
 # 
 # 
@@ -62,13 +62,13 @@ def keys():
     keys.append({ 'id': key.id, 'keystring': key.keystring })
   return jsonify({ 'keys': keys })
 
-# @api.route('/api/keys/delete_all')
-# def delete_keys():
-#   keys_list = Key.query.all()
-#   keys = []
-#   for key in keys_list:
-#     keys.append({ 'id': key.id, 'keystring': key.keystring })
-#   return jsonify({ 'keys': keys })
+@api.route('/api/keys/delete_all')
+def delete_keys():
+  keys_list = Key.query.all()
+  for key in keys_list:
+    db.session.delete(key)
+  db.session.commit()
+  return 'All API keys have been deleted', 201
 
 # @api.route('/api/keys/<int:key_id>')
 # def authenticate_key():

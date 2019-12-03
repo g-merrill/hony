@@ -1,5 +1,12 @@
 .SeedDataBtn {
   background: green;
   color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
   font-weight: bold;
+  margin: 0 0 30px;
+  &:focus {
+    outline: 0;
+  }
 }

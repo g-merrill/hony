@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import storyData from '../data/stories.json';
+import './css/SeedDataBtn.scss';
 
 class SeedDataBtn extends Component {
 
@@ -19,7 +20,12 @@ class SeedDataBtn extends Component {
 
   render() {
     return (
-      <button onClick={this.loadAllStoryData}>Import Stories to DB</button>
+      <button 
+        onClick={this.loadAllStoryData}
+        className='SeedDataBtn'
+      >
+        Import Stories to DB
+      </button>
     );
   }
 }
