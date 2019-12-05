@@ -33,7 +33,7 @@ const InfoBar = ({ user, logoutUser, searchQuery, filteredStoriesLength, allStor
           <h3 className='api-string'>
             https://hony.herokuapp.com/api/stories?search={searchQuery}
           </h3>
-          <p className='login-for-key'>Please <Link to='/login'>log in</Link> or <a href='/auth/signup'>sign up</a> to generate an API access key.</p>
+          <p className='login-for-key'>Please <Link to='/login'>log in</Link> or <Link to='/signup'>sign up</Link> to generate an API access key.</p>
         </>
       )}
       </>
@@ -65,7 +65,7 @@ const InfoBar = ({ user, logoutUser, searchQuery, filteredStoriesLength, allStor
         <h3 className='api-string'>
           https://hony.herokuapp.com/api/stories
         </h3>
-        <p className='login-for-key'>Please <Link to='/login'>log in</Link> or <a href='/auth/signup'>sign up</a> to generate an API access key.</p>
+        <p className='login-for-key'>Please <Link to='/login'>log in</Link> or <Link to='/signup'>sign up</Link> to generate an API access key.</p>
       </>
     )}
     </>

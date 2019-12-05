@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './css/Login.scss';
 
-const Login = props => {
+const Login = ({ loginUser, history }) => {
 
   const [messages, setMessages] = useState([])
   const [email, setEmail] = useState('');
@@ -34,8 +34,8 @@ const Login = props => {
         throw new Error();
       } else {
         // perform any now-logged-in actions, probably set user in app's state via calling function from here
-        props.loginUser(user);
-        props.history.push('/');
+        loginUser(user);
+        history.push('/');
       }
     } catch (err) {
       setMessages(['Please check your login details and try again.'])
@@ -47,7 +47,7 @@ const Login = props => {
       <form onSubmit={handleSubmit}>
         <div className="field">
           <input 
-            className="input is-large" 
+            className="input" 
             type="email" 
             name="email" 
             placeholder="Your Email" 
@@ -57,7 +57,7 @@ const Login = props => {
         </div>
         <div className="field">
           <input 
-            className="input is-large" 
+            className="input" 
             type="password" 
             name="password" 
             placeholder="Your Password" 
@@ -74,7 +74,7 @@ const Login = props => {
             Remember me
           </label>
         </div>
-        <button className="button is-block is-info is-large is-fullwidth">Login</button>
+        <button className="login-btn">Login</button>
         { messages.length ? (
           <p>{messages[0]}</p>
         ) : null }

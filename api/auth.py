@@ -6,11 +6,6 @@ from . import db
 
 auth = Blueprint('auth', __name__)
 
-# will need to switch these templates over to React frontend:
-# /login
-# /profile
-# /signup
-
 @auth.route('/auth/login', methods=['POST'])
 def login_post():
   login_data = request.get_json()
@@ -35,56 +30,34 @@ def login_post():
     'key': user.key.keystring if user.key else None
   })
 
-# delete after creating in React
-@auth.route('/auth/signup')
-def signup():
-  return render_template('signup.html')
-
-# old signup post route
+# signup route
 @auth.route('/auth/signup', methods=['POST'])
 def signup_post():
-  email = request.form.get('email')
-  name = request.form.get('name')
-  password = request.form.get('password')
+  signup_data = request.get_json()
+  email = signup_data['email']
+  name = signup_data['name']
+  password = signup_data['password']
 
   user = User.query.filter_by(email=email).first()
 
   if user:
-    flash('Email address already exists.')
-    return redirect(url_for('auth.signup'))
+    return jsonify({
+      'message': 'Email address already exists.'
+    })
 
-  new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
+  new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'), key=None)
 
   db.session.add(new_user)
   db.session.commit()
 
-  return redirect('/login')
+  login_user(new_user)
 
-# new signup post route
-# @auth.route('/auth/signup', methods=['POST'])
-# def signup_post():
-#   signup_data = request.get_json()
-#   email = login_data['email']
-#   name = login_data['name']
-#   password = login_data['password']
-
-#   user = User.query.filter_by(email=email).first()
-
-#   if user:
-#     return jsonify({
-#       'message': 'Email address already exists.'
-#     })
-  
-#   new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
-
-#   db.session.add(new_user)
-#   db.session.commit()
-
-#   return jsonify({
-#     'id': new_user.id,
-#     'email': new_user.email,
-#     'name': new_user.name
-#   })
+  return jsonify({
+    'id': new_user.id,
+    'email': new_user.email,
+    'name': new_user.name,
+    'key': None
+  })
 
 @auth.route('/auth/logout')
 @login_required

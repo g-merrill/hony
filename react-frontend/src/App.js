@@ -14,7 +14,7 @@ const App = () => {
 
   // once the app mounts, this loads all stories from the fetch endpoint into state as 'stories'
   useEffect(() => {
-    fetch('/api/stories?key=03WD92').then(res => 
+    fetch('/api/stories?key=YgPgur').then(res => 
       res.json().then(data => {
         setAllStories(data.stories);
       })
@@ -44,6 +44,10 @@ const App = () => {
     fetch('/auth/logout').then(res => {
       if (res.ok) setUser(null);
     });
+  }
+
+  const signupUser = userObj => {
+    setUser(userObj);
   }
 
   const updateUserWithKey = () => {
@@ -81,6 +85,7 @@ const App = () => {
         <Route exact path='/signup' render={({ history }) => (
           <Signup 
             history={history}
+            signupUser={signupUser}
           />
         )}/>
       </Switch>

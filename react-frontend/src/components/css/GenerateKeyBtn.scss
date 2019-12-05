@@ -5,15 +5,22 @@
   width: 90vw;
   margin: 0 0 30px;
   .GenerateKeyBtn {
-    background: green;
+    background: rgba(67, 160, 78, 1);
     color: rgba(241, 243, 244, 1);
     padding: 5px 10px;
     border-radius: 5px;
     border: none;
     font-weight: bold;
     margin: 0 5vw 0 0;
+    border: 1px solid transparent;
     &:focus {
       outline: 0;
+    }
+    &:hover {
+      background: rgba(255, 224, 196, 0.5);
+      color: rgba(67, 160, 78, 1);
+      border: 1px solid rgba(67, 160, 78, 1);
+      cursor: pointer;
     }
   }
   .logout-btn {
@@ -24,12 +31,20 @@
     border: none;
     font-weight: bold;
     margin: 0 0 0 5vw;
+    transition: 0.3s ease;
+    border: 1px solid transparent;
     &:focus {
       outline: 0;
     }
+    &:hover {
+      background: rgba(255, 224, 196, 0.5);
+      color: indianred;
+      border: 1px solid indianred;
+      cursor: pointer;
+    }
   }
   .key-generated-msg {
-    color: gold;
+    color: rgba(67, 160, 78, 1);
     font-weight: bold;
   }
 }

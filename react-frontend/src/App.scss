@@ -2,13 +2,17 @@
   padding: 40px 0 0;
   width: 100vw;
   min-height: 100vh;
-  background: rgba(50, 50, 50, 1);
-  color: rgba(241, 243, 244, 1);
+  // background: rgba(50, 50, 50, 1);
+  background: rgba(255, 224, 196, 0.5);
+  // color: rgba(241, 243, 244, 1);
   display: flex;
   flex-direction: column;
   align-items: center;
   a {
-    color: gold;
+    color: rgba(67, 160, 78, 1);
     text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
