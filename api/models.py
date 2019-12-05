@@ -6,6 +6,7 @@ class User(UserMixin, db.Model):
   email = db.Column(db.String(100), unique=True, nullable=False)
   password = db.Column(db.String(100), nullable=False)
   name = db.Column(db.String(100))
+  key = db.relationship('Key', uselist=False, back_populates='user')
 
 class Story(db.Model):
   id = db.Column(db.Integer, primary_key=True)
@@ -20,4 +21,5 @@ class Story(db.Model):
 class Key(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   keystring = db.Column(db.String(6), unique=True, nullable=False)
-  
+  user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+  user = db.relationship('User', back_populates='key')

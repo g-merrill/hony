@@ -6,22 +6,20 @@ import InfoBar from '../components/InfoBar';
 import Stories from '../components/Stories';
 import LoadingStories from '../components/LoadingStories';
 
-const Home = ({ user, logoutUser, allStories, queryStories, searchQuery, filteredStories }) => (
+const Home = ({ user, logoutUser, allStories, queryStories, searchQuery, filteredStories, updateUserWithKey }) => (
   <div className='Home'>
-  { user ? (
-    <button onClick={logoutUser}>Log Out</button>
-  ) : (
-    <Link to='/login'>Log In</Link>
-  )}
   { allStories.length ? (
     <>
       <SearchBar
         queryStories={queryStories} 
       />
       <InfoBar
+        user={user}
+        logoutUser={logoutUser}
         searchQuery={searchQuery}
         filteredStoriesLength={filteredStories.length}
         allStoriesLength={allStories.length}
+        updateUserWithKey={updateUserWithKey}
       />
       <Stories
         stories={ searchQuery ? filteredStories : allStories } 

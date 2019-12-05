@@ -1,53 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './css/GenerateKeyBtn.scss';
 
-const GenerateKeyBtn = () => {
-  const [apiKey, setApiKey] = useState('');
-  const [clicked, setClicked] = useState(false);
-  const [counter, setCounter] = useState(0);
+const GenerateKeyBtn = ({ updateUserWithKey, user, logoutUser }) => {
 
-  const handleClick = () => {
-    setClicked(true);
-    setCounter(1);
+  const fetchKey = () => {
+    fetch('/api/keys/new', {
+      method: 'POST',
+      headers: new Headers({ 'Content-Type': 'application/json' }),
+      body: JSON.stringify(user)
+    })
+    .then(() => {
+      // this pulls the updated user with the newly generated key from the backend
+      updateUserWithKey();
+    })
   }
-
-// /api/keys/new
-
-  useEffect(() => {
-    // get generated key from backend
-    const fetchKey = () => {
-      fetch('/api/keys/new')
-      .then(res => 
-        res.json().then(data => {
-          setApiKey(data.generated_key);
-        })
-      );
-    }
-    counter > 0 && fetchKey()
-  }, [counter]);
-
-  // useEffect(() => {
-  //   if (counter === 0) {
-  //     let newCounter = counter + 1;
-  //     setCounter(1)
-  //   }
-  // }, [counter])
-    
 
   return (
     <div className='GenerateKeyBtn-ctnr'>
-    { clicked ? (
+    { user.key ? (
       <>
-        <p>API Key Generated!  Add the following to the end of your custom API endpoint:</p>
-        <h3 className='generatedKey'>&key={apiKey}</h3>
+        <p className='key-generated-msg'>
+          API Key Generated!
+        </p>
+        <button 
+          className='logout-btn' 
+          onClick={logoutUser}
+        >
+          Log Out
+        </button>
       </>
     ) : (
-      <button 
-        className='GenerateKeyBtn'
-        onClick={handleClick}
-      >
-        GenerateKeyBtn
-      </button>
+      <>
+        <button 
+          className='GenerateKeyBtn'
+          onClick={fetchKey}
+        >
+          Generate Key!
+        </button>
+        <button 
+          className='logout-btn' 
+          onClick={logoutUser}
+        >
+          Log Out
+        </button>
+      </>
     )}
     </div>
   );

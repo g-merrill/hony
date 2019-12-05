@@ -1,14 +1,17 @@
 .Story {
-  max-width: 90vw;
+  max-width: 95vw;
   margin: 0 0 60px;
+  border: 4px double gold;
+  padding: 2.5vw;
   .Story-timestamp {
     margin: 0 0 10px;
   }
   .Story-content {
     margin: 0 0 10px;
+    line-height: 1.5;
   }
   .Story-img {
-    max-width: 90vw;
+    max-width: 89vw;
     margin: 20px 0 0;
   }
   .query-word {

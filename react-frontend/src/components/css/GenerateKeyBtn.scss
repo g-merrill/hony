@@ -1,21 +1,35 @@
 .GenerateKeyBtn-ctnr {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   width: 90vw;
   margin: 0 0 30px;
   .GenerateKeyBtn {
     background: green;
-    color: white;
+    color: rgba(241, 243, 244, 1);
     padding: 5px 10px;
     border-radius: 5px;
     border: none;
     font-weight: bold;
+    margin: 0 5vw 0 0;
     &:focus {
       outline: 0;
     }
   }
-  .generatedKey {
-    margin: 5px 0 0;
+  .logout-btn {
+    background: indianred;
+    color: rgba(241, 243, 244, 1);
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    margin: 0 0 0 5vw;
+    &:focus {
+      outline: 0;
+    }
+  }
+  .key-generated-msg {
+    color: gold;
+    font-weight: bold;
   }
 }

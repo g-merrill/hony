@@ -31,33 +31,60 @@ def login_post():
   return jsonify({
     'id': user.id,
     'email': user.email,
-    'name': user.name
+    'name': user.name,
+    'key': user.key.keystring if user.key else None
   })
 
+# delete after creating in React
+@auth.route('/auth/signup')
+def signup():
+  return render_template('signup.html')
+
+# old signup post route
 @auth.route('/auth/signup', methods=['POST'])
 def signup_post():
-  signup_data = request.get_json()
-  email = login_data['email']
-  name = login_data['name']
-  password = login_data['password']
+  email = request.form.get('email')
+  name = request.form.get('name')
+  password = request.form.get('password')
 
   user = User.query.filter_by(email=email).first()
 
   if user:
-    return jsonify({
-      'message': 'Email address already exists.'
-    })
-  
+    flash('Email address already exists.')
+    return redirect(url_for('auth.signup'))
+
   new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
 
   db.session.add(new_user)
   db.session.commit()
 
-  return jsonify({
-    'id': new_user.id,
-    'email': new_user.email,
-    'name': new_user.name
-  })
+  return redirect('/login')
+
+# new signup post route
+# @auth.route('/auth/signup', methods=['POST'])
+# def signup_post():
+#   signup_data = request.get_json()
+#   email = login_data['email']
+#   name = login_data['name']
+#   password = login_data['password']
+
+#   user = User.query.filter_by(email=email).first()
+
+#   if user:
+#     return jsonify({
+#       'message': 'Email address already exists.'
+#     })
+  
+#   new_user = User(email=email, name=name, password=generate_password_hash(password, method='sha256'))
+
+#   db.session.add(new_user)
+#   db.session.commit()
+
+#   return jsonify({
+#     'id': new_user.id,
+#     'email': new_user.email,
+#     'name': new_user.name
+#   })
 
 @auth.route('/auth/logout')
 @login_required

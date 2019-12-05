@@ -4,7 +4,7 @@ import './App.scss';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-// import SeedDataBtn from './components/SeedDataBtn';
+import SeedDataBtn from './components/SeedDataBtn';
 
 const App = () => {
 
@@ -15,7 +15,7 @@ const App = () => {
 
   // once the app mounts, this loads all stories from the fetch endpoint into state as 'stories'
   useEffect(() => {
-    fetch('/api/stories?key=G4TCdX').then(res => 
+    fetch('/api/stories?key=03WD92').then(res => 
       res.json().then(data => {
         setAllStories(data.stories);
       })
@@ -47,6 +47,17 @@ const App = () => {
     });
   }
 
+  const updateUserWithKey = () => {
+    // make it so that the key generator backend view function requires a valid user that doesn't have a key yet
+    // in that function, update the user's key field
+    // also assign the key an owner
+    // here, all we need to do is re-pull the updated user and setUser
+    fetch(`/api/users/${user.id}`)
+    .then(res => res.json())
+    .then(updatedUser => setUser(updatedUser))
+    // with a user.key available, frontend will rerender as desired
+  }
+
   return (
     <div className='App' >
       <Switch>
@@ -59,6 +70,7 @@ const App = () => {
             queryStories={queryStories}
             searchQuery={searchQuery}
             filteredStories={filteredStories}
+            updateUserWithKey={updateUserWithKey}
           />
         )}/>
         <Route exact path='/login' render={({ history }) => (
