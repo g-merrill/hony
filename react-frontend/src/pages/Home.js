@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './css/Home.scss';
 import SearchBar from '../components/SearchBar';
 import InfoBar from '../components/InfoBar';
