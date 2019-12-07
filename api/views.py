@@ -82,13 +82,13 @@ def keys():
   return jsonify({ 'keys': keys })
 
 # FOR DEV PURPOSES ONLY
-@api.route('/api/keys/delete_all')
-def delete_keys():
-  keys_list = Key.query.all()
-  for key in keys_list:
-    db.session.delete(key)
-  db.session.commit()
-  return 'All API keys have been deleted', 201
+# @api.route('/api/keys/delete_all')
+# def delete_keys():
+#   keys_list = Key.query.all()
+#   for key in keys_list:
+#     db.session.delete(key)
+#   db.session.commit()
+#   return 'All API keys have been deleted', 201
 
 # @api.route('/api/keys/<int:key_id>')
 # def authenticate_key():
@@ -108,10 +108,10 @@ def users():
   return jsonify({ 'users': users })
 
 # FOR DEV PURPOSES ONLY
-@api.route('/api/users/delete_all')
-def delete_users():
-  users_list = User.query.all()
-  for user in users_list:
-    db.session.delete(user)
-  db.session.commit()
-  return 'All users have been deleted', 201
+# @api.route('/api/users/delete_all')
+# def delete_users():
+#   users_list = User.query.all()
+#   for user in users_list:
+#     db.session.delete(user)
+#   db.session.commit()
+#   return 'All users have been deleted', 201

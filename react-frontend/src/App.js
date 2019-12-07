@@ -14,7 +14,7 @@ const App = () => {
 
   // once the app mounts, this loads all stories from the fetch endpoint into state as 'stories'
   useEffect(() => {
-    fetch('/api/stories?key=YgPgur').then(res => 
+    fetch(`/api/stories?key=${process.env.REACT_APP_API_KEY}`).then(res => 
       res.json().then(data => {
         setAllStories(data.stories);
       })

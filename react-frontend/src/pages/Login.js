@@ -43,43 +43,42 @@ const Login = ({ loginUser, history }) => {
   }
 
   return (
-    <div className="Login">
-      <form onSubmit={handleSubmit}>
-        <div className="field">
+    <form className="Login" onSubmit={handleSubmit}>
+      <div className="field">
+        <input 
+          className="input" 
+          type="email" 
+          name="email" 
+          placeholder="Your Email" 
+          value={email}
+          onChange={handleChange}
+        />
+      </div>
+      <div className="field">
+        <input 
+          className="input" 
+          type="password" 
+          name="password" 
+          placeholder="Your Password" 
+          value={password}
+          onChange={handleChange} 
+        />
+      </div>
+      <div className="field">
+        <label className="checkbox">
           <input 
-            className="input" 
-            type="email" 
-            name="email" 
-            placeholder="Your Email" 
-            value={email}
-            onChange={handleChange}
+            className="checkbox-input" 
+            type="checkbox" 
+            onChange={handleCheckboxChange}
           />
-        </div>
-        <div className="field">
-          <input 
-            className="input" 
-            type="password" 
-            name="password" 
-            placeholder="Your Password" 
-            value={password}
-            onChange={handleChange} 
-          />
-        </div>
-        <div className="field">
-          <label className="checkbox">
-            <input 
-              type="checkbox" 
-              onChange={handleCheckboxChange}
-            />
-            Remember me
-          </label>
-        </div>
-        <button className="login-btn">Login</button>
-        { messages.length ? (
-          <p>{messages[0]}</p>
-        ) : null }
-      </form>
-    </div>
+          Remember me
+        </label>
+      </div>
+      <button className="login-btn">Login</button>
+      { messages.length ? (
+        <p>{messages[0]}</p>
+      ) : null }
+    </form>
   )
 }
 
