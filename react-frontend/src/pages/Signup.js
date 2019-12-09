@@ -40,23 +40,21 @@ const Signup = ({ signupUser, history }) => {
   }
 
   return (
-    <div className="Signup">
-      <form onSubmit={handleSubmit}>
-        <div className="field">
-          <input className="input" type="email" name="email" placeholder="Email" value={email} onChange={handleChange} />
-        </div>
-        <div className="field">
-          <input className="input" type="text" name="name" placeholder="Name" value={name} onChange={handleChange} />
-        </div>
-        <div className="field">
-          <input className="input" type="password" name="password" placeholder="Password" value={password} onChange={handleChange} />
-        </div>
-        <button className="signup-btn">Sign Up</button>
-      { messages.length ? (
-        <p>{messages[0]}</p>
-      ) : null }
-      </form>
-    </div>
+    <form className="Signup" onSubmit={handleSubmit}>
+      <div className="field">
+        <input className="input" type="email" name="email" placeholder="Email" value={email} onChange={handleChange} />
+      </div>
+      <div className="field">
+        <input className="input" type="text" name="name" placeholder="Name" value={name} onChange={handleChange} />
+      </div>
+      <div className="field">
+        <input className="input" type="password" name="password" placeholder="Password" value={password} onChange={handleChange} />
+      </div>
+      <button className="signup-btn">Sign Up</button>
+    { messages.length ? (
+      <p className='try-again'>{messages[0]}</p>
+    ) : null }
+    </form>
   )
 }
 

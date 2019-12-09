@@ -3,4 +3,35 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  .field {
+    width: 50%;
+    margin: 0 0 20px;
+    display: flex;
+    align-items: center;
+  }
+  .input {
+    width: 100%;
+    padding: 10px 0 10px 10px;
+    border: none;
+    border-radius: 5px;
+  }
+  .signup-btn {
+    cursor: pointer;
+    border: none;
+    background: rgba(131, 199, 146, 1.0);
+    color: white;
+    opacity: 0.75;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: opacity 0.3s ease;
+    margin: 0 0 20px;
+    &:hover {
+      opacity: 1.0;
+    }
+  }
+  .try-again {
+    color: red;
+  }
 }

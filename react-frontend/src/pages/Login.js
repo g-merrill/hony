@@ -76,7 +76,7 @@ const Login = ({ loginUser, history }) => {
       </div>
       <button className="login-btn">Login</button>
       { messages.length ? (
-        <p>{messages[0]}</p>
+        <p className='try-again'>{messages[0]}</p>
       ) : null }
     </form>
   )
