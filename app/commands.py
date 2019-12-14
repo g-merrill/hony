@@ -2,7 +2,7 @@ import click
 from flask.cli import with_appcontext
 
 from . import db
-from .models import Story, Key
+from .models import User, Key
 
 @click.command(name='reset_db')
 @with_appcontext
