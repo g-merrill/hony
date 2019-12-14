@@ -12,18 +12,20 @@ const Home = ({ user, logoutUser, allStories, queryStories, searchQuery, filtere
       <SearchBar
         queryStories={queryStories} 
       />
-      <InfoBar
-        user={user}
-        logoutUser={logoutUser}
-        searchQuery={searchQuery}
-        filteredStoriesLength={filteredStories.length}
-        allStoriesLength={allStories.length}
-        updateUserWithKey={updateUserWithKey}
-      />
-      <Stories
-        stories={ searchQuery ? filteredStories : allStories } 
-        query={searchQuery}
-      />
+      <div className="content">
+        <InfoBar
+          user={user}
+          logoutUser={logoutUser}
+          searchQuery={searchQuery}
+          filteredStoriesLength={filteredStories.length}
+          allStoriesLength={allStories.length}
+          updateUserWithKey={updateUserWithKey}
+        />
+        <Stories
+          stories={ searchQuery ? filteredStories : allStories } 
+          query={searchQuery}
+        />
+      </div>
     </>
   ) : (
     <LoadingStories />

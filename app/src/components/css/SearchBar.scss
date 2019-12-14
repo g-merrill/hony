@@ -1,8 +1,10 @@
 .SearchBar-form {
-  width: 90%;
-  margin: 0 0 30px;
+  width: 100%;
   display: flex;
   justify-content: center;
+  position: fixed;
+  padding: 20px 0;
+  background: inherit;
   .SearchBar-input {
     padding: 0.75em 1em;
     width: 75%;
