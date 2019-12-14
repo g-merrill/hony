@@ -7,40 +7,43 @@
   .GenerateKeyBtn {
     background: rgba(67, 160, 78, 1);
     color: rgba(241, 243, 244, 1);
+    border: 1px solid transparent;
     padding: 5px 10px;
     border-radius: 5px;
-    border: none;
     font-weight: bold;
     margin: 0 5vw 0 0;
-    border: 1px solid transparent;
-    &:focus {
-      outline: 0;
-    }
+    transition: all 0.3s ease;
     &:hover {
       background: rgba(255, 224, 196, 0.5);
       color: rgba(67, 160, 78, 1);
       border: 1px solid rgba(67, 160, 78, 1);
       cursor: pointer;
     }
+    &:active {
+      background: rgba(67, 160, 78, 1);
+      color: rgba(241, 243, 244, 1);
+      border: 1px solid transparent;
+    }
   }
   .logout-btn {
     background: indianred;
     color: rgba(241, 243, 244, 1);
+    border: 1px solid transparent;
     padding: 5px 10px;
     border-radius: 5px;
-    border: none;
     font-weight: bold;
     margin: 0 0 0 5vw;
-    transition: 0.3s ease;
-    border: 1px solid transparent;
-    &:focus {
-      outline: 0;
-    }
+    transition: all 0.3s ease;
     &:hover {
       background: rgba(255, 224, 196, 0.5);
       color: indianred;
       border: 1px solid indianred;
       cursor: pointer;
+    }
+    &:active {
+      background: indianred;
+      color: rgba(241, 243, 244, 1);
+      border: 1px solid transparent;
     }
   }
   .key-generated-msg {

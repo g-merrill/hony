@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './css/Signup.scss';
+import { Link } from 'react-router-dom';
 
 const Signup = ({ signupUser, history }) => {
   const [messages, setMessages] = useState([])
@@ -50,7 +51,10 @@ const Signup = ({ signupUser, history }) => {
       <div className="field">
         <input className="input" type="password" name="password" placeholder="Password" value={password} onChange={handleChange} />
       </div>
-      <button className="signup-btn">Sign Up</button>
+      <div>
+        <button className="signup-btn">Sign Up</button>
+        <Link to="/">Cancel</Link>
+      </div>
     { messages.length ? (
       <p className='try-again'>{messages[0]}</p>
     ) : null }

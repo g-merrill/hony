@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './css/Login.scss';
 
 const Login = ({ loginUser, history }) => {
@@ -74,7 +75,10 @@ const Login = ({ loginUser, history }) => {
           Remember me
         </label>
       </div>
-      <button className="login-btn">Login</button>
+      <div>
+        <button className="login-btn">Login</button>
+        <Link to="/">Cancel</Link>
+      </div>
       { messages.length ? (
         <p className='try-again'>{messages[0]}</p>
       ) : null }

@@ -11,9 +11,6 @@
     border: 2px solid rgba(67, 86, 139, 1);
     color: rgba(67, 86, 139, 1);
     border-radius: 50px;
-    &:focus {
-      outline: 0;
-    }
     &::placeholder {
       color: rgba(67, 86, 139, 0.75);
     }
