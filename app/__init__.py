@@ -10,6 +10,7 @@ from .commands import reset_db
 def create_app():
   app = Flask(__name__, static_folder='build')
 
+  app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
   app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 
   db.init_app(app)
