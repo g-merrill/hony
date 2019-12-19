@@ -2,7 +2,6 @@ import os
 from flask import Flask, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-from flask_cors import CORS
 
 db = SQLAlchemy()
 
@@ -10,7 +9,6 @@ from .commands import reset_db
 
 def create_app():
   app = Flask(__name__, static_folder='build')
-  CORS(app)
 
   app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
   app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
