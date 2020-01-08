@@ -4,6 +4,7 @@ import SearchBar from '../components/SearchBar';
 import InfoBar from '../components/InfoBar';
 import Stories from '../components/Stories';
 import LoadingStories from '../components/LoadingStories';
+import Attributions from '../components/Attributions';
 
 const Home = ({ user, logoutUser, allStories, queryStories, searchQuery, filteredStories, updateUserWithKey }) => (
   <div className='Home'>
@@ -13,6 +14,7 @@ const Home = ({ user, logoutUser, allStories, queryStories, searchQuery, filtere
         queryStories={queryStories} 
       />
       <div className="content">
+        <Attributions />
         <InfoBar
           user={user}
           logoutUser={logoutUser}
